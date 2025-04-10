@@ -1,28 +1,34 @@
 const express = require("express");
-const sqlite3 = require("sqlite3").verbose();
+const { Pool } = require("pg");
 
 const app = express();
-const PORT = 4000;
+const port = 3000;
 
-// Conecta ao banco de dados SQLite
-const db = new sqlite3.Database("./quotes.db");
-
-// Rota para retornar uma frase aleatória
-app.get("/quote", (req, res) => {
-  db.get("SELECT text FROM quotes ORDER BY RANDOM() LIMIT 1", [], (err, row) => {
-    if (err) {
-      console.error("Erro ao buscar frase:", err.message);
-      return res.status(500).json({ error: "Erro interno" });
-    }
-    if (row) {
-      res.json({ quote: row.text });
-    } else {
-      res.status(404).json({ error: "Nenhuma frase encontrada" });
-    }
-  });
+// Configurar conexão com o banco de dados PostgreSQL
+const pool = new Pool({
+  host: process.env.DB_HOST || "localhost",
+  port: process.env.DB_PORT || 5432,
+  user: process.env.DB_USER || "postgres",
+  password: process.env.DB_PASSWORD || "password",
+  database: process.env.DB_NAME || "motivational",
 });
 
-// Inicia o servidor
-app.listen(PORT, () => {
-  console.log(`Servidor rodando em http://localhost:${PORT}`);
+// Rota para retornar uma frase motivacional aleatória
+app.get("/quote", async (req, res) => {
+  try {
+    const result = await pool.query("SELECT text FROM quotes ORDER BY RANDOM() LIMIT 1");
+    const quote = result.rows[0];
+    if (quote) {
+      res.json({ quote: quote.text });
+    } else {
+      res.status(404).json({ error: "No quotes found." });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch quote." });
+  }
+});
+
+// Iniciar o servidor
+app.listen(port, () => {
+  console.log(`Motivational Service is running on http://localhost:${port}`);
 });
