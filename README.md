@@ -25,28 +25,20 @@ Certifique-se de ter as seguintes ferramentas instaladas:
    ```bash
    git clone https://github.com/eduardodiell/motivational-service.git
    cd motivational-service
+   
 Instale as dependências do projeto:
-
-bash
-Copy
-Edit
 npm install
+
 Executar com Docker
 Inicie os serviços com Docker Compose:
-
-bash
-Copy
-Edit
 docker-compose up --build
+
 O microserviço estará disponível em http://localhost:3000.
 
 Testar a API
 Use ferramentas como Postman ou cURL para testar o endpoint:
-
-bash
-Copy
-Edit
 GET http://localhost:3000/api/motivational-quote
+
 Banco de Dados
 Host: localhost
 
@@ -60,14 +52,7 @@ Nome do Banco: motivational
 
 Scripts úteis
 Para inicializar o banco de dados:
-
-bash
-Copy
-Edit
 node initDb.js
-Para rodar o servidor localmente sem Docker:
 
-bash
-Copy
-Edit
+Para rodar o servidor localmente sem Docker:
 npm start
