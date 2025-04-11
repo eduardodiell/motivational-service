@@ -1,89 +1,73 @@
+# Motivational Service
 
-# 🥋 Motivational Service
+Este projeto é um microserviço para fornecer frases motivacionais com foco no tema **Jiu-Jitsu**. Ele foi desenvolvido usando **Node.js**, **PostgreSQL** e **Docker**.
 
-Este é um microserviço desenvolvido para fornecer frases motivacionais sobre Jiu-Jitsu. Ele faz parte do projeto **Jiu-Jitsu Training & Diet Tracker**, permitindo integração com outros sistemas por meio de uma API REST.
+## Funcionalidades
 
----
+- Retorna frases motivacionais aleatórias via API.
+- Banco de dados gerenciado com PostgreSQL.
+- Totalmente configurável e pronto para uso com Docker.
 
-## 📚 Funcionalidades
+## Requisitos
 
-- **API REST**:
-  - **GET /quote**: Retorna uma frase motivacional aleatória.
-- **Banco de Dados**:
-  - Gerenciamento eficiente de frases com PostgreSQL.
-- **Conteinerização**:
-  - Configuração simplificada utilizando Docker.
+Certifique-se de ter as seguintes ferramentas instaladas:
 
----
+- [Node.js](https://nodejs.org/)
+- [Docker](https://www.docker.com/)
+- [Git](https://git-scm.com/)
 
-## 🛠 Tecnologias Utilizadas
+## Como usar
 
-- **Node.js** e **Express.js**: Criação da API REST.
-- **PostgreSQL**: Armazenamento e gerenciamento das frases.
-- **Docker** e **Docker Compose**: Conteinerização para fácil deploy.
+### Configuração inicial
 
----
+1. Clone este repositório:
 
-## 🚀 Como Executar o Projeto
-
-### Usando Docker (Recomendado)
-
-1. **Clone o Repositório**:
    ```bash
-   git clone https://github.com/seu-usuario/motivational-service.git
+   git clone https://github.com/eduardodiell/motivational-service.git
    cd motivational-service
-Inicie os Contêineres:
-
-bash
-Copy
-Edit
-docker-compose up --build
-Acesse o Serviço: O serviço estará disponível em http://localhost:3000.
-
-🌐 Endpoints Disponíveis
-GET /quote
-Descrição: Retorna uma frase motivacional aleatória.
-
-Resposta de Exemplo:
-
-json
-Copy
-Edit
-{
-  "quote": "A coragem de lutar é maior do que o medo de perder."
-}
-🧰 Configuração Manual (Opcional)
-Pré-requisitos:
-
-Node.js (Baixar aqui).
-
-PostgreSQL instalado e em execução.
-
-Configuração do Banco de Dados:
-
-Crie um banco de dados chamado motivational_service.
-
-Atualize o arquivo .env:
-
-ini
-Copy
-Edit
-DB_USER=seu_usuario
-DB_PASSWORD=sua_senha
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=motivational_service
-Inicialize o Banco de Dados:
-
-bash
-Copy
-Edit
-node initDb.js
-Execute o Servidor:
+Instale as dependências do projeto:
 
 bash
 Copy
 Edit
 npm install
+Executar com Docker
+Inicie os serviços com Docker Compose:
+
+bash
+Copy
+Edit
+docker-compose up --build
+O microserviço estará disponível em http://localhost:3000.
+
+Testar a API
+Use ferramentas como Postman ou cURL para testar o endpoint:
+
+bash
+Copy
+Edit
+GET http://localhost:3000/api/motivational-quote
+Banco de Dados
+Host: localhost
+
+Porta: 5432
+
+Usuário: postgres
+
+Senha: password
+
+Nome do Banco: motivational
+
+Scripts úteis
+Para inicializar o banco de dados:
+
+bash
+Copy
+Edit
+node initDb.js
+Para rodar o servidor localmente sem Docker:
+
+bash
+Copy
+Edit
 npm start
-O serviço estará disponível em http://localhost:3000.
